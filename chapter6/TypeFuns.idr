@@ -6,6 +6,12 @@ getStringOrInt : (isInt : Bool) -> StringOrInt isInt
 getStringOrInt False = "Ninety Four"
 getStringOrInt True = 94
 
-valToString : (isInt : Bool) -> StringOrInt isInt -> String
+valToString1 : (isInt : Bool) -> StringOrInt isInt -> String
+valToString1 False x = trim x
+valToString1 True x = cast x
+
+valToString : (isInt : Bool) -> (case isInt of
+                                      False => String
+                                      True => Int) -> String
 valToString False x = trim x
 valToString True x = cast x
