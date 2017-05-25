@@ -13,11 +13,53 @@ SchemaType SString = String
 SchemaType SInt = Int
 SchemaType (x .+. y) = (SchemaType x, SchemaType y)
 
+{-
 data DataStore : Type where
      MkData : (schema : Schema) ->
               (size : Nat) ->
               (items : Vect size (SchemaType schema)) ->
               DataStore
+
+
+size : DataStore -> Nat
+size (MkData schema' size' items') = size'
+
+schema : DataStore -> Schema
+schema (MkData schema' size' items') = schema'
+
+items : (store : DataStore) -> Vect (size store) (SchemaType (schema store))
+items (MkData schema' size' items') = items'
+-}
+
+{-
+this is a record - which is a way of automatically deriving the above projections
+
+this replaces the data type defined above and it's projections
+
+*DataStore> :doc DataStore
+Record DataStore
+
+Constructor:
+    MkData : (schema : Schema) ->
+        (size : Nat) -> (items : Vect size (SchemaType schema)) -> DataStore
+
+
+Projections:
+    schema : (rec : DataStore) -> Schema
+
+
+    size : (rec : DataStore) -> Nat
+
+
+    items : (rec : DataStore) -> Vect (size rec) (SchemaType (schema rec))
+
+-}
+record DataStore where
+       constructor MkData
+       schema : Schema
+       size : Nat
+       items : Vect size (SchemaType schema)
+
 
 
 {-
