@@ -14,3 +14,6 @@ occur item [] = 0
 occur item (x :: xs) = case x == item of
                             False => occur item xs
                             True => 1 + occur item xs
+
+data Tree elem = Empty
+               | Node (Tree elem) elem (Tree elem)
