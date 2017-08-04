@@ -24,3 +24,29 @@ Ord Album where
         EQ => compare title title'
         diff_year => diff_year
       diff_artist => diff_artist
+
+-- exercises
+
+data Shape = Triangle Double Double
+           | Rectangle Double Double
+           | Circle Double
+
+-- Eq for Shape
+Eq Shape where
+    (==) (Triangle x y) (Triangle x' y') = x == x' && y == y'
+    (==) (Rectangle x y) (Rectangle x' y') = x == x' && y == y'
+    (==) (Circle r) (Circle r') = r == r'
+    (==) _ _ = False
+
+area : Shape -> Double
+area (Triangle b h) = 0.5 * b * h
+area (Rectangle b h) = b * h
+area (Circle r) = pi * r * r
+
+
+Ord Shape where
+    compare x y = compare (area x) (area y)
+
+
+testShapes : List Shape
+testShapes = [Circle 3, Triangle 3 9, Rectangle 2 6, Circle 4, Rectangle 2 7]
