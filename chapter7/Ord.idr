@@ -50,3 +50,6 @@ Ord Shape where
 
 testShapes : List Shape
 testShapes = [Circle 3, Triangle 3 9, Rectangle 2 6, Circle 4, Rectangle 2 7]
+
+Show Album where
+    show (MkAlbum artist title year) = title ++ " by " ++ artist ++ " (released " ++ show year ++ ")"
