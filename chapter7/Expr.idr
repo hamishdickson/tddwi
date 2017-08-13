@@ -22,3 +22,17 @@ Neg ty => Neg (Expr ty) where
     negate x = 0 - x
     (-) = Sub
     abs = Abs
+
+Show ty => Show (Expr ty) where
+    show (Val x) = show x
+    show (Add x y) = (show x) ++ " + " ++ (show y)
+    show (Sub x y) = (show x) ++ " - " ++ (show y)
+    show (Mul x y) = (show x) ++ " * " ++ (show y)
+    show (Div x y) = (show x) ++ " / " ++ (show y)
+    show (Abs x) = "Abs " ++ (show x)
+
+(Neg a, Integral a, Eq a) => Eq (Expr a) where
+    (==) x y = eval x == eval y
+
+(Neg num, Integral num) => Cast (Expr num) num where
+    cast orig = eval orig
